@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EverGreen合同会社</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F7F6F2;
+      --text: #1A1A18;
+      --muted: #888880;
+      --accent: #2D5A3D;
+      --line: #D8D6CF;
+      --white: #FFFFFF;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Shippori Mincho', serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 2.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .logo {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .logo span {
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: block;
+      letter-spacing: 0.15em;
+      margin-top: 2px;
+    }
+
+    nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      margin-left: 2.5rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 60vh;
+    }
+
+    .hero-left {
+      padding: 6rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--line);
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      line-height: 1.9;
+      color: var(--muted);
+      max-width: 28rem;
+    }
+
+    .hero-right {
+      padding: 6rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+
+    .mark {
+      width: 160px;
+      height: 160px;
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .mark::before {
+      content: '';
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+    }
+
+    .mark-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    /* ── Sections ── */
+    section {
+      border-top: 1px solid var(--line);
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+
+    .section-inner {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      padding: 4rem;
+      gap: 4rem;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      padding-top: 0.2rem;
+    }
+
+    .section-content h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .section-content p {
+      font-size: 0.9rem;
+      line-height: 2;
+      color: var(--muted);
+    }
+
+    /* 事業内容 */
+    .services {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .service-item {
+      padding: 1.5rem;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .service-item h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .service-item p {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    /* 会社概要テーブル */
+    .company-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .company-table tr {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .company-table th {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-align: left;
+      padding: 1rem 2rem 1rem 0;
+      width: 8rem;
+      vertical-align: top;
+      font-weight: 400;
+    }
+
+    .company-table td {
+      font-size: 0.85rem;
+      line-height: 1.9;
+      color: var(--text);
+      padding: 1rem 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      header { padding: 1.5rem 1.5rem; }
+      nav { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 3rem 1.5rem; border-right: none; border-bottom: 1px solid var(--line); }
+      .hero-right { padding: 2rem 1.5rem; }
+      .section-inner { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; gap: 1.5rem; }
+      .services { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="logo" href="#">
+      EverGreen合同会社
+      <span>EVERGREEN LLC</span>
+    </a>
+    <nav>
+      <a href="#business">事業内容</a>
+      <a href="#company">会社概要</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero-left">
+      <p class="eyebrow">Software Development</p>
+      <h1>テクノロジーで、<br><em>価値を生み出す。</em></h1>
+      <p class="hero-desc">
+        EverGreen合同会社は、ソフトウェアの企画・開発・販売を通じて、
+        人々の学びと仕事をより豊かにするプロダクトを届けます。
+      </p>
+    </div>
+    <div class="hero-right">
+      <div class="mark">
+        <div class="mark-text">Ever<br>Green<br>LLC</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="business">
+    <div class="section-inner">
+      <div class="section-label">Business</div>
+      <div class="section-content">
+        <h2>事業内容</h2>
+        <div class="services">
+          <div class="service-item">
+            <h3>スマートフォンアプリ開発</h3>
+            <p>iOS・Android向けアプリケーションの企画・設計・開発・運用を行います。</p>
+          </div>
+          <div class="service-item">
+            <h3>ソフトウェア開発</h3>
+            <p>Webアプリケーション・業務システムの設計・開発・保守を提供します。</p>
+          </div>
+          <div class="service-item">
+            <h3>ITコンサルティング</h3>
+            <p>Salesforceをはじめとするクラウドサービスの導入・活用支援を行います。</p>
+          </div>
+          <div class="service-item">
+            <h3>プロダクト販売</h3>
+            <p>自社開発のソフトウェアプロダクトの企画・販売・運営を行います。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="company">
+    <div class="section-inner">
+      <div class="section-label">Company</div>
+      <div class="section-content">
+        <h2>会社概要</h2>
+        <table class="company-table">
+          <tr>
+            <th>社名</th>
+            <td>EverGreen合同会社</td>
+          </tr>
+          <tr>
+            <th>代表者</th>
+            <td>茂木 草平</td>
+          </tr>
+          <tr>
+            <th>所在地</th>
+            <td>〒103-0022<br>東京都中央区日本橋室町１丁目１１番１２号<br>日本橋水野ビル７階</td>
+          </tr>
+          <tr>
+            <th>事業内容</th>
+            <td>ソフトウェアの企画・開発・販売<br>スマートフォンアプリケーションの開発・運営<br>ITコンサルティング</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 EverGreen合同会社. All rights reserved.</p>
+    <p>Tokyo, Japan</p>
+  </footer>
+
+</body>
+</html>
